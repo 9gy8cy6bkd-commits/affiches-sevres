@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#1B2A4A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Maillots SFC92">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<title>Maillots Sèvres F.C. 92</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout : bandeau club, puis une carte par match avec les jeux en vignettes cliquables */
+:root{
+  --bg:#EEF1F6; --surface:#FFFFFF; --ink:#16213A; --muted:#5B6476; --line:#D5DAE3;
+  --navy:#1B2A4A; --accent:#E0592A; --pick:#1F4FBF; --pickbg:#E6EDFB; --ok:#1E7A3A;
+  --kitbg:#E4E8EF;
+  --display:'Barlow Condensed','Arial Narrow',sans-serif; --body:'Source Sans 3','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#10151F; --surface:#18202E; --ink:#E8ECF3; --muted:#9AA4B6; --line:#2C3647;
+  --navy:#0E1626; --accent:#F07040; --pick:#7EA2FF; --pickbg:#22304D; --ok:#5CC77E; --kitbg:#DDE2EA; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10151F; --surface:#18202E; --ink:#E8ECF3; --muted:#9AA4B6; --line:#2C3647;
+  --navy:#0E1626; --accent:#F07040; --pick:#7EA2FF; --pickbg:#22304D; --ok:#5CC77E; --kitbg:#DDE2EA; color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.4}
+header{background:var(--navy);color:#FFFFFF}
+.wrap{max-width:920px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header .wrap{display:flex;gap:18px;align-items:center;padding-block:22px}
+header{padding-top:env(safe-area-inset-top,0px)}
+.install{background:var(--pickbg);border:1px solid var(--line);border-left:4px solid var(--pick);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.install p{margin:0;flex:1 1 220px}
+.send{padding-bottom:max(12px,env(safe-area-inset-bottom,0px))}
+header img{width:64px;height:auto;background:#FFFFFF;border-radius:10px;padding:6px;flex:none}
+.kicker{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:var(--display);font-size:40px;line-height:1;margin:4px 0 2px;text-transform:uppercase;text-wrap:balance}
+.sub{font-family:var(--display);font-size:20px;text-transform:uppercase;opacity:.9}
+main .wrap{padding-block:20px 48px;display:flex;flex-direction:column;gap:14px}
+.intro{color:var(--muted);max-width:65ch;margin:0}
+.notice{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px}
+.day{font-family:var(--display);font-size:24px;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:10px;margin-top:10px}
+.day::after{content:"";flex:1;height:2px;background:var(--line)}
+.match{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 18px;align-items:center}
+.time{font-family:var(--display);font-size:28px;color:var(--accent);line-height:1}
+.team{font-family:var(--display);font-size:26px;text-transform:uppercase;line-height:1.05}
+.opp{font-weight:700}
+.meta{color:var(--muted);font-size:14px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:2px 9px;border:1.5px solid var(--ink);margin-left:6px;vertical-align:2px}
+.tag.dom{background:var(--ink);color:var(--surface)}
+.adv{display:flex;align-items:center;gap:5px;font-size:14px;color:var(--muted);margin-top:4px;flex-wrap:wrap}
+.dot{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--ink);display:inline-block}
+.kits{display:flex;gap:10px;flex-wrap:wrap}
+.kit{appearance:none;border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 6px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font:inherit;color:var(--ink);width:86px}
+.kit .pic{background:var(--kitbg);border-radius:6px;width:100%;height:118px;display:flex;justify-content:center;align-items:center}
+.kit img{height:110px;width:auto;mix-blend-mode:multiply}
+.kit .lab{font-size:13px;font-weight:700;text-align:center;line-height:1.2}
+.kit .hint{font-size:11px;color:var(--muted);min-height:14px}
+.kit:hover{border-color:var(--pick)}
+.kit:focus-visible{outline:3px solid var(--pick);outline-offset:2px}
+.kit[aria-pressed="true"]{border-color:var(--pick);background:var(--pickbg)}
+.kit[aria-pressed="true"] .hint{color:var(--pick);font-weight:700}
+.kit:disabled{cursor:default;opacity:.75}
+.state{grid-column:1/-1;font-size:13px;color:var(--muted);min-height:18px}
+.state.ok{color:var(--ok)}
+.ret{grid-column:1/-1;border-top:1px dashed var(--line);padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.ret summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--ink)}
+.ret .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ret select,.ret textarea,#hist-team{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.ret textarea{width:100%;box-sizing:border-box;min-height:60px;resize:vertical}
+.btn{appearance:none;font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:8px 14px;background:var(--navy);color:#FFFFFF;cursor:pointer}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.ret select:focus-visible,.ret textarea:focus-visible{outline:3px solid var(--pick);outline-offset:2px}
+.last{font-size:13px;color:var(--muted)}
+.send{position:sticky;bottom:0;z-index:5;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--pick);border-radius:12px;padding:12px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;box-shadow:0 -4px 16px rgba(0,0,0,.08)}
+.send input{font:inherit;font-size:15px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--bg);color:var(--fg);min-width:0;flex:1 1 180px}
+.send .count{font-size:14px;color:var(--muted);flex:1 1 100%}
+.hist{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.hist h2{font-family:var(--display);font-size:26px;text-transform:uppercase;margin:0}
+.hist table{width:100%;border-collapse:collapse;font-size:14px}
+.hist th{text-align:left;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--line);padding:6px 8px}
+.hist td{border-bottom:1px solid var(--line);padding:8px;vertical-align:top}
+.hist .tw{overflow-x:auto}
+.pill{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 8px;white-space:nowrap}
+.pill.ok{background:var(--pickbg);color:var(--ok)}.pill.bad{background:var(--pickbg);color:var(--accent)}
+@media (max-width:640px){.match{grid-template-columns:minmax(0,1fr)}.kits{justify-content:flex-start}.kit{width:calc((100% - 20px)/3);max-width:100px}}
+@media (prefers-reduced-motion:no-preference){.kit{transition:border-color .15s,background .15s}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><img src="logo.png" alt="Logo du Sèvres F.C. 92"><div><div class="kicker">Sèvres F.C. 92 · Équipements</div><h1>Choix des maillots</h1><div class="sub">Week-end du 7 au 9 novembre 2026</div></div></div></header>
+<main><div class="wrap">
+<p class="intro">Pour chaque match, touchez le jeu que l'équipe doit porter<span id="intro-mode">. Le choix est enregistré tout de suite et repris sur le planning interne du club</span>. Au retour des maillots, ouvrez « Retour du jeu » sur la carte du match pour noter l'état et un commentaire. Le jeu marqué « Conseillé » suit la règle du club : bleu roi par défaut et à l'extérieur ; à domicile contre une équipe en bleu ou en blanc, un autre jeu.</p>
+<div id="install" class="install" hidden><p id="install-txt"></p><button type="button" class="btn" id="install-btn" hidden>Installer l’appli</button></div>
+<div id="notice" class="notice" hidden></div>
+<div id="list"></div>
+<div class="send" id="send" hidden><span class="count" id="send-count"></span><label for="send-name" class="meta">Votre nom</label><input id="send-name" maxlength="60" autocomplete="name"><button type="button" class="btn" id="send-btn">Envoyer mes choix par e-mail</button></div>
+<section class="hist" id="hist"><h2>Retours de la saison</h2>
+<p class="intro">Les retours avec un commentaire depuis le début de la saison 2026-2027, par jeu de maillots, du plus récent au plus ancien.</p>
+<div class="row" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label for="hist-team">Jeu de maillots</label><select id="hist-team"><option value="">Toutes</option></select></div>
+<div class="tw"><table><thead><tr><th>Date</th><th>Jeu</th><th>Match</th><th>État</th><th>Commentaire</th><th>Par</th></tr></thead><tbody id="hist-body"><tr><td colspan="6">Aucun retour enregistré pour l'instant. Le premier se fait depuis la carte d'un match, rubrique « Retour du jeu ».</td></tr></tbody></table></div>
+</section>
+</div></main>
+<script>
+const WEEK='2026-11-07';
+const MATCHES=[{"k": "u14c", "day": "Samedi 7 novembre", "time": "13h", "team": "U14 C", "opp": "RUEIL MALMAISON 24", "kind": "ext", "lieu": "Stade du Parc n°4 · Rueil-Malmaison", "adv": ["Bleu"], "sugg": "bleu", "img": {"bleu": "kits/u14-bleu.jpg", "blanc": "kits/u14-blanc.jpg", "jaune": "kits/u14-jaune.jpg"}}, {"k": "u14b", "day": "Samedi 7 novembre", "time": "13h", "team": "U14 B", "opp": "COURBEVOIE 23", "kind": "dom", "lieu": "Stade des Fontaines · Sèvres", "adv": ["Jaune", "Bleu"], "sugg": "blanc", "img": {"bleu": "kits/u14-bleu.jpg", "blanc": "kits/u14-blanc.jpg", "jaune": "kits/u14-jaune.jpg"}}, {"k": "u13d", "day": "Samedi 7 novembre", "time": "13h30", "team": "U13 / U14 D", "opp": "GARENNE COLOMBES AF", "kind": "ext", "lieu": "Stade Marcel Payen · Nanterre", "adv": ["Vert", "Blanc"], "sugg": "bleu", "img": {"bleu": "kits/u14-bleu.jpg", "blanc": "kits/u14-blanc.jpg", "jaune": "kits/u14-jaune.jpg"}}, {"k": "u15a", "day": "Samedi 7 novembre", "time": "13h45", "team": "U15 A", "opp": "BAGNEUX COM 2", "kind": "ext", "lieu": "Parc des Sports · Bagneux", "adv": ["Rouge", "Noir", "Blanc"], "sugg": "bleu", "img": {"bleu": "kits/u15-bleu.jpg", "bleu-mc": "kits/u15-bleu-mc.jpg", "blanc": "kits/u15-blanc.jpg", "jaune": "kits/u15-jaune.jpg"}}, {"k": "u14a", "day": "Samedi 7 novembre", "time": "15h15", "team": "U14 A", "opp": "BOULOGNE-BILLANCOURT AC 23", "kind": "ext", "lieu": "Stade Marcel Bec n°2 · Meudon", "adv": ["Orange", "Blanc"], "sugg": "bleu", "img": {"bleu": "kits/u14-bleu.jpg", "blanc": "kits/u14-blanc.jpg", "jaune": "kits/u14-jaune.jpg"}}, {"k": "u15f", "day": "Samedi 7 novembre", "time": "15h30", "team": "U15 F", "opp": "BOULOGNE-BILLANCOURT AC", "kind": "dom", "lieu": "Stade Jean Wagner · Sèvres", "adv": ["Orange", "Blanc"], "sugg": "jaune", "img": {"bleu": "kits/feminines-bleu.jpg", "blanc": "kits/feminines-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}, {"k": "u18f", "day": "Samedi 7 novembre", "time": "15h30", "team": "U18 F", "opp": "VOLTAIRE CHÂTENAY-MALABRY", "kind": "ext", "lieu": "Stade des Bruyères · Châtenay-Malabry", "adv": ["Jaune", "Rouge"], "sugg": "bleu", "img": {"bleu": "kits/feminines-bleu.jpg", "blanc": "kits/feminines-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}, {"k": "sf", "day": "Samedi 7 novembre", "time": "17h30", "team": "Séniors F", "opp": "AULNAY FC", "kind": "dom", "lieu": "Stade Jean Wagner · Sèvres", "adv": ["Jaune", "Vert"], "sugg": "bleu", "img": {"bleu": "kits/feminines-bleu.jpg", "blanc": "kits/feminines-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}, {"k": "sf8", "day": "Samedi 7 novembre", "time": "18h", "team": "Séniors F à 8", "opp": "ST ARNOULT US", "kind": "ext", "lieu": "Stade municipal n°1 · Saint-Arnoult-en-Yvelines", "adv": ["Rouge"], "sugg": "bleu", "img": {"bleu": "kits/feminines-bleu.jpg", "blanc": "kits/feminines-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}, {"k": "u18a", "day": "Samedi 7 novembre", "time": "19h30", "team": "U18 A", "opp": "NANTERRE ES 22", "kind": "dom", "lieu": "Stade des Fontaines · Sèvres", "adv": ["Jaune", "Bleu"], "sugg": "blanc", "img": {"bleu": "kits/u18-bleu.jpg", "blanc": "kits/u18-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}, {"k": "v45", "day": "Dimanche 8 novembre", "time": "11h", "team": "Vétérans +45", "opp": "CRAMPONS PARISIENS", "kind": "ext", "lieu": "Stade Suzanne Lenglen n°1 · Paris 15e", "adv": ["Blanc", "Rouge"], "sugg": "bleu", "img": {"bleu": "kits/veterans-a-bleu.jpg", "blanc": "kits/veterans-a-blanc.jpg", "blanc-mc": "kits/veterans-a-blanc-mc.jpg", "jaune": "kits/veterans-a-jaune.jpg"}}, {"k": "va", "day": "Dimanche 8 novembre", "time": "9h30", "team": "Vétérans A", "opp": "CSM CLAMART", "kind": "ext", "lieu": "Stade de la Plaine n°1 · Clamart", "adv": ["Rouge", "Blanc"], "sugg": "bleu", "img": {"bleu": "kits/veterans-a-bleu.jpg", "blanc": "kits/veterans-a-blanc.jpg", "blanc-mc": "kits/veterans-a-blanc-mc.jpg", "jaune": "kits/veterans-a-jaune.jpg"}}, {"k": "u16a", "day": "Dimanche 8 novembre", "time": "11h30", "team": "U16 A", "opp": "ANTONY FOOT ÉVOLUTION 21", "kind": "dom", "lieu": "Stade des Fontaines · Sèvres", "adv": ["Rouge", "Noir"], "sugg": "bleu", "img": {"bleu": "kits/u16-bleu.jpg", "blanc": "kits/u16-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}, {"k": "u16b", "day": "Dimanche 8 novembre", "time": "12h30", "team": "U16 B", "opp": "COLOMBES LSO", "kind": "dom", "lieu": "Stade Jean Wagner · Sèvres", "adv": ["Rouge", "Noir"], "sugg": "bleu", "img": {"bleu": "kits/u16-bleu.jpg", "blanc": "kits/u16-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}, {"k": "u18b", "day": "Dimanche 8 novembre", "time": "13h", "team": "U18 B", "opp": "ANTONY FOOT ÉVOLUTION 22", "kind": "ext", "lieu": "Stade Georges Suant n°2 · Antony", "adv": ["Rouge", "Noir"], "sugg": "bleu", "img": {"bleu": "kits/u18-bleu.jpg", "blanc": "kits/u18-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}, {"k": "u20", "day": "Dimanche 8 novembre", "time": "15h", "team": "U20", "opp": "VERSAILLES 78 FC", "kind": "ext", "lieu": "Stade de Porchefontaine n°3 · Versailles", "adv": ["Bleu", "Blanc"], "sugg": "bleu", "img": {"bleu": "kits/u20-bleu.jpg", "blanc": "kits/u20-blanc.jpg", "jaune": "kits/u20-jaune.jpg"}}, {"k": "sb", "day": "Dimanche 8 novembre", "time": "13h", "team": "Séniors B", "opp": "NANTERRE AJSC", "kind": "ext", "lieu": "Parc des Sports des Sévines n°1 · Gennevilliers", "adv": ["Bleu", "Noir"], "sugg": "bleu", "img": {"bleu": "kits/seniors-b-bleu.jpg", "bleu-mc": "kits/seniors-b-bleu-mc.jpg", "blanc": "kits/seniors-b-blanc.jpg", "blanc-mc": "kits/seniors-b-blanc-mc.jpg", "jaune": "kits/seniors-b-jaune.jpg"}}, {"k": "sa", "day": "Dimanche 8 novembre", "time": "14h", "team": "Séniors A", "opp": "NEUILLY-SUR-MARNE SFC 2", "kind": "ext", "lieu": "Stade Georges Foulon n°3 · Neuilly-sur-Marne", "adv": ["Rouge", "Noir"], "sugg": "bleu", "img": {"bleu": "kits/seniors-a-bleu.jpg", "bleu-mc": "kits/seniors-a-bleu-mc.jpg", "blanc": "kits/seniors-a-blanc.jpg", "blanc-mc": "kits/seniors-a-blanc-mc.jpg", "jaune": "kits/seniors-a-jaune.jpg"}}, {"k": "u16c", "day": "Dimanche 8 novembre", "time": "17h", "team": "U16 C", "opp": "NEUILLY OLYMPIQUE 22", "kind": "ext", "lieu": "Stade Monclar · Neuilly-sur-Seine", "adv": ["Marine", "Blanc"], "sugg": "bleu", "img": {"bleu": "kits/u16-bleu.jpg", "blanc": "kits/u16-blanc.jpg", "jaune": "kits/sans-equipe-jaune.jpg"}}];
+const COL={Bleu:'#1F4FBF',Blanc:'#FFFFFF',Rouge:'#C62828',Noir:'#141414',Jaune:'#F2C200',Violet:'#6A2C91',Gris:'#8A8D93',Vert:'#1E8B3A',Orange:'#E8731A',Marine:'#14284B',Ciel:'#7FB6E6'};
+const LAB={bleu:'Bleu roi','bleu-mc':'Bleu roi manches courtes',blanc:'Blanc','blanc-mc':'Blanc manches courtes',jaune:'Jaune fluo'};
+const MAIL='lbroudic@gmail.com';
+// Choix déjà reçus (par la page ou par e-mail), recopiés à chaque publication pour les visiteurs sans compte
+const PRESET={};
+const chosen=Object.assign({},PRESET); let db=null, canWrite=true, mailMode=true; const picked={};
+const docId=k=>WEEK+'_'+k;
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function render(){
+  const list=document.getElementById('list'); list.innerHTML=''; let day='';
+  for(const m of MATCHES){
+    if(m.day!==day){day=m.day;const h=document.createElement('div');h.className='day';h.textContent=day;list.appendChild(h)}
+    const c=document.createElement('section');c.className='match';c.id='m-'+m.k;
+    const ext=m.kind==='ext';
+    c.innerHTML='<div style="min-width:0"><div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><span class="time">'+esc(m.time)+'</span><span class="team">'+esc(m.team)+'</span><span class="tag '+(ext?'':'dom')+'">'+(ext?'Extérieur':'Domicile')+'</span></div>'
+      +'<div class="opp">contre '+esc(m.opp)+'</div><div class="meta">'+esc(m.lieu)+'</div>'
+      +(m.adv.length?'<div class="adv">Adversaire '+m.adv.map(a=>'<span class="dot" style="background:'+(COL[a]||'#999')+'"></span>').join('')+' '+esc(m.adv.join(' / '))+'</div>':'')+'</div>';
+    const kits=document.createElement('div');kits.className='kits';kits.setAttribute('role','group');kits.setAttribute('aria-label','Jeu de maillots '+m.team);
+    const cur=chosen[m.k]||null;
+    for(const col of Object.keys(m.img)){
+      const b=document.createElement('button');b.type='button';b.className='kit';b.id='kit-'+m.k+'-'+col;
+      b.setAttribute('aria-pressed',String(cur===col));b.disabled=!canWrite;
+      b.innerHTML='<span class="pic"><img src="'+m.img[col]+'" alt="Maillot '+LAB[col]+'"></span><span class="lab">'+LAB[col]+'</span><span class="hint">'+(cur===col?'Choisi':(m.sugg===col?'Conseillé':''))+'</span>';
+      b.addEventListener('click',()=>pick(m,col));kits.appendChild(b)}
+    c.appendChild(kits);
+    const st=document.createElement('div');st.className='state';st.id='st-'+m.k;st.textContent=cur?('Choisi : '+LAB[cur]):'Pas encore choisi';
+    c.appendChild(st);c.appendChild(retForm(m));list.appendChild(c)}
+}
+async function pick(m,col){
+  if(mailMode){picked[m.k]=col;chosen[m.k]=col;render();const s=document.getElementById('st-'+m.k);s.textContent='Choisi : '+LAB[col]+' (à envoyer avec le bouton en bas de page)';updSend();return}
+  if(!db||!canWrite) return;
+  const st=document.getElementById('st-'+m.k);
+  if(chosen[m.k]===col) return;
+  const prev=chosen[m.k]; chosen[m.k]=col; render();
+  const s=document.getElementById('st-'+m.k); s.textContent='Enregistrement…';
+  try{
+    await db.collection('choix').doc(docId(m.k)).set({week:WEEK,match:m.k,team:m.team,opp:m.opp,kit:col,at:new Date().toISOString()});
+    const s2=document.getElementById('st-'+m.k); s2.textContent='Enregistré : '+LAB[col]; s2.className='state ok';
+  }catch(e){
+    if(prev) chosen[m.k]=prev; else delete chosen[m.k]; render();
+    const s3=document.getElementById('st-'+m.k); s3.textContent="Le choix n'a pas été enregistré. Vérifiez que vous avez le droit de modifier cette page, puis réessayez.";
+  }
+}
+const SETS={'u14':'U14','u15':'U15 (TNP)','u15-1er-jeu':'U15 (sans sponsor)','u16':'U16','u18':'U18','u20':'U20','seniors-a':'Séniors A','seniors-b':'Séniors B','veterans-a':'Vétérans A','feminines':'Féminines','sans-equipe':'Sans équipe'};
+function jeuOf(m,kit){const f=(m.img[kit]||'').replace('kits/','').replace('.jpg','');const col=f.endsWith('-'+kit)?kit:f.slice(f.lastIndexOf('-')+1);const set=f.slice(0,f.length-col.length-1);return (SETS[set]||set)+' · '+(LAB[col]||col)}
+const ETAT={complet:'Complet',manque:'Il manque des pièces',abime:'Abîmé ou sale',autre:'Autre'};
+const forms={}; let retours=[]; let me=null, userCap=null;
+function retForm(m){
+  if(forms[m.k]){forms[m.k].querySelector('.btn').disabled=!canWrite;updateLast(m.k);return forms[m.k]}
+  const d=document.createElement('details');d.className='ret';
+  d.innerHTML='<summary>Retour du jeu</summary><div class="row"><label for="etat-'+m.k+'">État</label><select id="etat-'+m.k+'">'+Object.entries(ETAT).map(([v,l])=>'<option value="'+v+'">'+l+'</option>').join('')+'</select></div>'
+    +'<label for="com-'+m.k+'" class="meta">Commentaire (ex. : il manque le maillot n°7, un short taché). Seuls les retours avec un commentaire sont gardés dans l’historique.</label><textarea id="com-'+m.k+'" maxlength="1000"></textarea>'
+    +'<div class="row"><button type="button" class="btn">Enregistrer le retour</button><span class="last" id="last-'+m.k+'"></span></div>';
+  d.querySelector('.btn').disabled=!canWrite;
+  d.querySelector('.btn').addEventListener('click',()=>saveRet(m,d));
+  forms[m.k]=d;updateLast(m.k);return d}
+function updateLast(k){
+  const el=forms[k]&&forms[k].querySelector('#last-'+k);if(!el)return;
+  const r=retours.filter(x=>x.week===WEEK&&x.match===k)[0];
+  el.textContent=r?('Dernier retour : '+ETAT[r.etat]+(r.comment?' · '+r.comment:'')):'';
+}
+async function saveRet(m,d){
+  const btn=d.querySelector('.btn'),etat=d.querySelector('select').value,ta=d.querySelector('textarea'),comment=ta.value.trim();
+  const last=d.querySelector('.last');
+  if(!comment){last.textContent=etat==='complet'?'Rien à signaler, aucun retour à garder.':'Ajoutez un commentaire pour expliquer ce qui ne va pas.';return}
+  if(mailMode){const kit=chosen[m.k]||m.sugg;const nom=document.getElementById('send-name').value.trim();
+    mail('Retour maillots - '+m.team+' contre '+m.opp,'Retour du jeu de maillots\n\nMatch : '+m.team+' contre '+m.opp+' ('+m.day+', '+m.time+')\nJeu : '+jeuOf(m,kit)+'\nÉtat : '+ETAT[etat]+'\nCommentaire : '+comment+'\n\nNom : '+(nom||'(non indiqué)')+'\nRéf. : '+WEEK+'/'+m.k+'/'+kit+'/'+etat);
+    last.textContent='Votre messagerie s\'ouvre avec le retour : envoyez l\'e-mail pour le transmettre au club.';return}
+  if(!db||!canWrite)return;
+  btn.disabled=true;last.textContent='Enregistrement…';
+  const at=new Date().toISOString(); const kit=chosen[m.k]||m.sugg;
+  try{
+    await db.collection('retours').doc(WEEK+'_'+m.k+'_'+Date.now()).set({week:WEEK,match:m.k,team:m.team,opp:m.opp,day:m.day,time:m.time,lieu:m.lieu,kind:m.kind,kit,jeu:jeuOf(m,kit),etat,comment,at,by:me||''});
+    ta.value='';last.textContent='Retour enregistré.';
+  }catch(e){last.textContent="Le retour n'a pas été enregistré. Vérifiez que vous avez le droit de modifier cette page, puis réessayez."}
+  btn.disabled=!canWrite;
+}
+async function renderHist(){
+  const sel=document.getElementById('hist-team'),cur=sel.value;
+  const teams=[...new Set(retours.map(r=>r.jeu||r.team))].sort();
+  sel.innerHTML='<option value="">Toutes</option>'+teams.map(t=>'<option'+(t===cur?' selected':'')+'>'+esc(t)+'</option>').join('');
+  const rows=retours.filter(r=>r.comment&&(!cur||(r.jeu||r.team)===cur));
+  const body=document.getElementById('hist-body');
+  if(!rows.length){body.innerHTML='<tr><td colspan="6">Aucun retour enregistré pour l\'instant. Le premier se fait depuis la carte d\'un match, rubrique « Retour du jeu ».</td></tr>';return}
+  let names={};
+  try{if(userCap){const ids=[...new Set(rows.map(r=>r.by).filter(Boolean))];if(ids.length)names=await userCap.profiles(ids)}}catch(e){}
+  body.innerHTML=rows.map(r=>'<tr><td>'+esc(new Date(r.at).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'}))+'</td><td><strong>'+esc(r.jeu||LAB[r.kit]||'')+'</strong></td><td><strong>'+esc(r.team)+'</strong> contre '+esc(r.opp||'')+'<br><span class="meta">'+esc([r.day,r.time].filter(Boolean).join(' · ')+(r.kind?(r.kind==='ext'?' · Extérieur':' · Domicile'):''))+(r.lieu?'<br>'+esc(r.lieu):'')+'</span></td><td><span class="pill '+(r.etat==='complet'?'ok':'bad')+'">'+esc(ETAT[r.etat]||r.etat||'')+'</span></td><td>'+esc(r.comment||'')+'</td><td>'+esc((names[r.by]&&names[r.by].name)||'Quelqu\'un')+'</td></tr>').join('');
+}
+document.getElementById('hist-team').addEventListener('change',renderHist);
+function mail(subject,body){location.href='mailto:'+MAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body)}
+function updSend(){const n=Object.keys(picked).length;const el=document.getElementById('send');el.hidden=!mailMode;document.getElementById('send-count').textContent=n?(n+' choix à envoyer'):'Touchez un jeu de maillots sur la carte d\'un match, puis envoyez vos choix au club.';document.getElementById('send-btn').disabled=!n}
+document.getElementById('send-btn').addEventListener('click',()=>{const ks=Object.keys(picked);if(!ks.length)return;const nom=document.getElementById('send-name').value.trim();
+  const lines=MATCHES.filter(m=>picked[m.k]).map(m=>'- '+m.team+' contre '+m.opp+' ('+m.day+', '+m.time+') : '+LAB[picked[m.k]]);
+  mail('Choix maillots - week-end du '+WEEK,'Choix des maillots\n\n'+lines.join('\n')+'\n\nNom : '+(nom||'(non indiqué)')+'\nRéf. : '+ks.map(k=>WEEK+'/'+k+'='+picked[k]).join(' '));
+  document.getElementById('send-count').textContent='Votre messagerie s\'ouvre avec vos choix : envoyez l\'e-mail pour les transmettre au club.'});
+function notice(t){const n=document.getElementById('notice');n.textContent=t;n.hidden=!t}
+render();updSend();
+notice('Chargement des choix déjà faits…');
+(async()=>{
+  const timer=setTimeout(()=>notice('Les choix ne se chargent pas. Rechargez la page dans un moment.'),10000);
+  db=(typeof claude!=='undefined'&&claude&&claude.use)?await claude.use('db'):null;
+  if(!db){clearTimeout(timer);notice('');document.getElementById('hist').hidden=true;document.getElementById('intro-mode').textContent=', puis envoyez vos choix au club avec le bouton en bas de page. Votre messagerie s\'ouvre avec un e-mail déjà rempli : il suffit de l\'envoyer';for(const b of document.querySelectorAll('.ret .btn'))b.textContent='Envoyer le retour par e-mail';return}
+  mailMode=false;canWrite=false;updSend();for(const b of document.querySelectorAll('.ret .btn'))b.textContent='Enregistrer le retour';
+  const user=await claude.use('user');
+  canWrite=user? ((await user.can('data.write'))!==false) : true;
+  userCap=user; try{ if(user) me=await user.id() }catch(e){}
+  db.collection('retours').orderBy('at','desc').limit(1000).onSnapshot(snap=>{
+    retours=snap.docs.map(d=>d.data()).filter(Boolean);
+    for(const k in forms) updateLast(k); renderHist();
+  },()=>{});
+  db.collection('choix').where('week','==',WEEK).onSnapshot(snap=>{
+    clearTimeout(timer);
+    for(const d of snap.docs){const v=d.data();if(v&&v.match&&v.kit) chosen[v.match]=v.kit}
+    notice(canWrite?'':'Vous pouvez voir les choix, mais pas les modifier. Demandez au club un accès en modification.');
+    render();
+  },()=>{clearTimeout(timer);notice('Les choix ne se chargent pas. Rechargez la page dans un moment.')});
+})();
+</script>
+<script>
+// Appli : nom mémorisé, bandeau d'installation, fonctionnement hors ligne
+(function(){
+  const n=document.getElementById('send-name');
+  try{n.value=localStorage.getItem('maillots-nom')||''}catch(e){}
+  n.addEventListener('change',()=>{try{localStorage.setItem('maillots-nom',n.value.trim())}catch(e){}});
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  const box=document.getElementById('install'),txt=document.getElementById('install-txt'),btn=document.getElementById('install-btn');
+  let seen=false;try{seen=localStorage.getItem('maillots-install-vu')==='1'}catch(e){}
+  if(!standalone&&!seen){
+    const ios=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    txt.textContent=ios?'Pour avoir l’appli sur votre iPhone : touchez le bouton Partager de Safari, puis « Sur l’écran d’accueil ».'
+                       :'Pour avoir l’appli sur votre téléphone : menu du navigateur (⋮), puis « Installer l’application » ou « Ajouter à l’écran d’accueil ».';
+    box.hidden=false;
+    const close=document.createElement('button');close.type='button';close.className='btn';close.textContent='OK';
+    close.addEventListener('click',()=>{box.hidden=true;try{localStorage.setItem('maillots-install-vu','1')}catch(e){}});box.appendChild(close);
+  }
+  let deferred=null;
+  addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;btn.hidden=false;if(!standalone){box.hidden=false;txt.textContent='Installez l’appli sur votre téléphone pour la retrouver sur l’écran d’accueil.'}});
+  btn.addEventListener('click',async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;box.hidden=true});
+  if('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+})();
+</script>
+</body>
+</html>
