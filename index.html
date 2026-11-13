@@ -87,6 +87,7 @@ const WEEKS=[{"id":"2026-10-17","lab":"17 – 18 oct.","fin":"2026-10-18","tous"
 const STADES={fontaines:['Stade des Fontaines','Sèvres'],wagner:['Stade Jean Wagner','Sèvres'],'marcel-bec':['Stade Marcel Bec','Meudon']};
 const VIEWS=[['tous','Tous les matchs'],['stades','Par stade'],['categories','Par catégorie'],['amical','Match amical']];
 const today=new Date().toISOString().slice(0,10);
+{const f=WEEKS.filter(w=>w.fin>=today);if(f.length)WEEKS.splice(0,WEEKS.length,...f);}
 const cur=(WEEKS.find(w=>w.fin>=today)||WEEKS[WEEKS.length-1]).id;
 let week=cur, list=[], idx=0;
 const view=()=>{const h=location.hash.slice(1);return VIEWS.some(v=>v[0]===h)?h:'tous';};
