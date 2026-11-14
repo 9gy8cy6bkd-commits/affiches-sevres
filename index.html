@@ -21,6 +21,7 @@ header .wrap{display:flex;flex-direction:column;gap:16px;padding-block:20px 18px
 .brand p{margin:0;color:var(--onmarine);font-size:.95rem}
 h1{font-family:var(--display);font-weight:800;font-size:clamp(1.9rem,5vw,2.8rem);letter-spacing:.01em;margin:0;line-height:1;text-transform:uppercase;text-wrap:balance}
 h1 em{font-style:normal;color:var(--orange)}
+.maj{display:inline-block;margin-top:6px;font-size:.8rem;font-weight:600;color:var(--onmarine);opacity:.9}
 .weeks{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
 .weeks button{flex:none;font:600 .98rem var(--body);color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 14px;cursor:pointer}
 .weeks button[aria-pressed="true"]{background:var(--orange);border-color:var(--orange)}
@@ -60,7 +61,7 @@ footer .wrap{padding-block:16px 28px}
 <header><div class="wrap">
   <div class="brand">
     <img src="logo.png" alt="Logo Sèvres F.C. 92">
-    <div><h1>Le week-end <em>du Sèvres F.C. 92</em></h1><p>Tous les matchs du club, à domicile et à l'extérieur</p></div>
+    <div><h1>Le week-end <em>du Sèvres F.C. 92</em></h1><span class="maj"><!--MAJ-->Mis à jour le 14/11 à 18h48<!--/MAJ--></span><p>Tous les matchs du club, à domicile et à l'extérieur</p></div>
   </div>
   <div class="weeks" id="weeks" role="group" aria-label="Choisir le week-end"></div>
 </div></header>
