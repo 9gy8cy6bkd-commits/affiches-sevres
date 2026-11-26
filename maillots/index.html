@@ -132,9 +132,9 @@ function render(){
     if(m.day!==day){day=m.day;const h=document.createElement('div');h.className='day';h.textContent=day;list.appendChild(h)}
     const c=document.createElement('section');c.className='match';c.id='m-'+m.k;
     const ext=m.kind==='ext';
-    c.innerHTML='<div style="min-width:0;display:flex;gap:14px;align-items:center">'+(m.logo?'<span class="clogo"><img src="'+m.logo+'" alt="Logo '+esc(m.opp)+'"></span>':'')+'<div style="min-width:0"><div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><span class="time">'+esc(m.time)+'</span><span class="team">'+esc(m.team)+'</span>'+(m.kind?'<span class="tag '+(ext?'':'dom')+'">'+(ext?'Extérieur':'Domicile')+'</span>':'')+'</div>'
+    c.innerHTML='<div style="min-width:0;display:flex;gap:14px;align-items:center"><div style="min-width:0;flex:1"><div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><span class="time">'+esc(m.time)+'</span><span class="team">'+esc(m.team)+'</span>'+(m.kind?'<span class="tag '+(ext?'':'dom')+'">'+(ext?'Extérieur':'Domicile')+'</span>':'')+'</div>'
       +'<div class="opp">contre '+esc(m.opp)+'</div><div class="meta">'+esc(m.lieu)+'</div>'
-      +(m.adv.length?'<div class="adv">Adversaire '+m.adv.map(a=>'<span class="dot" style="background:'+(COL[a]||'#999')+'"></span>').join('')+' '+esc(m.adv.join(' / '))+'</div>':'')+'</div></div>';
+      +(m.adv.length?'<div class="adv">Adversaire '+m.adv.map(a=>'<span class="dot" style="background:'+(COL[a]||'#999')+'"></span>').join('')+' '+esc(m.adv.join(' / '))+'</div>':'')+'</div>'+(m.logo?'<span class="clogo"><img src="'+m.logo+'" alt="Logo '+esc(m.opp)+'"></span>':'')+'</div>';
     const kits=document.createElement('div');kits.className='kits';kits.setAttribute('role','group');kits.setAttribute('aria-label','Jeu de maillots '+m.team);
     const cur=chosen[m.k]||null;
     for(const col of Object.keys(m.img)){
